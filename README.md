@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛸 Salescope: Visualize your Sales Galaxy
 
-## Getting Started
+![Salescope V3 Mockup](public/assets/mockup.png)
 
-First, run the development server:
+**Salescope** is an enterprise-grade sales intelligence platform built for luminous clarity. It transforms fragmented sales data into cinematic, actionable insights using state-of-the-art web technologies.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Neural Dashboard**: A consolidated intelligence hub with real-time analytics and predictive pulse.
+- **AI-Powered Predictions**: Forecast commercial trends with enterprise-grade machine learning models.
+- **Smart Inventory Core**: Sophisticated asset ledger with automated stock lifecycle tracking.
+- **Bespoke Glassmorphic UI**: Ultra-premium "Luminous Clarity" aesthetic with fluid Framer Motion transitions.
+- **Bulletproof Security**: End-to-end encryption for sensitive financial and operational data.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) + [DaisyUI 5](https://daisyui.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **State & Auth**: [NextAuth.js](https://next-auth.js.org/)
+- **Notifications**: [React Hot Toast](https://react-hot-toast.com/)
 
-## Learn More
+## 🛠️ Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+### Prerequisites
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Node.js 18+
+- npm / yarn / pnpm
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Installation
 
-## Deploy on Vercel
+1. **Clone the repository:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   git clone https://github.com/cristianpy09/salesscope-frontend.git
+   cd salesscope-frontend
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment:**
+   Create a `.env.local` file with your backend URL and Auth secrets.
+
+4. **Run development server:**
+   ```bash
+   npm run dev
+   ```
+
+Open [http://localhost:3000](http://localhost:3000) to explore your Sales Galaxy.
+
+## 🎨 Design Philosophy: "Luminous Clarity"
+
+The Salescope V3 experience is defined by **Luminous Clarity**:
+
+- **Glass-Panel System**: Semi-transparent surfaces with background blurs and 1px precision borders.
+- **Electric Palette**: Deep midnight backgrounds paired with Electric Lime and vibrant accents.
+- **Cinematic Motion**: Every interaction is guided by fluid, spring-based animations.
+
+---
+
+Built with ❤️ for the future of commercial operations.
