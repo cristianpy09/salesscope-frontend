@@ -1,9 +1,9 @@
-import { AntonFont, Bebas, nunito, RubikFont } from "@/fonts/font";
+import { nunito } from "@/fonts/font";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
 import type { Metadata } from "next";
-import { SessionProvider } from "next-auth/react";
+import Providers from "./providers";
 
 export const metadata: Metadata = {
   title: "SaleScope",
@@ -17,12 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <html data-theme="abyss" lang="es">
-      <body className={`${nunito.className}`} > 
-        <Toaster position="top-center"/>
-        
-
-           {children}
-       
+      <body className={`${nunito.className}`}>
+        <Providers>
+          <Toaster position="top-center" />
+          {children}
+        </Providers>
       </body>
     </html>
   );

@@ -4,6 +4,8 @@ import { Product } from "@/types/ProductType";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import Button from "../Button";
+import Input from "../Input";
+import { Edit3, X, Save, Package, Tag, DollarSign, Layers } from "lucide-react";
 
 type Props = {
   product: Product | null;
@@ -19,57 +21,105 @@ export default function ListSeconSection({ product, onSave, onCancel }: Props) {
   }, [product, reset]);
 
   if (!product) {
-    return <div className="w-100 p-5 text-gray-500"></div>;
+    return null;
   }
 
   return (
-    <form
-      onSubmit={handleSubmit(onSave)}
-      className="bg-base-200 rounded-xl w-100 p-5 space-y-10"
-    >
-      <h2 className="font-bold text-2xl">Edit Product</h2>
+    <div className="glass-panel p-1 rounded-3xl border border-white/5 premium-shadow sticky top-0">
+      <form onSubmit={handleSubmit(onSave)} className="p-8 flex flex-col gap-8">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center">
+              <Edit3 className="text-primary w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-black tracking-tight">
+                Modify Asset
+              </h2>
+              <p className="text-[10px] font-bold opacity-30 uppercase tracking-widest">
+                Heuristic Adjustment
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={onCancel}
+            className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors opacity-30 hover:opacity-100"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
 
-      <div className="flex flex-col space-y-1">
-        <label className="text-sm font-medium">Product name</label>
-        <input
-          {...register("name")}
-          className="p-2 rounded bg-base-100 border border-bg-gray-200"
-        />
-      </div>
+        <div className="space-y-6">
+          <div className="space-y-3">
+            <label className="text-xs font-bold uppercase tracking-[0.2em] opacity-40 ml-1">
+              Core Label
+            </label>
+            <Input
+              {...register("name", { required: true })}
+              placeholder="Asset Label"
+              leftIcon={<Package className="w-4 h-4" />}
+            />
+          </div>
 
-      <div className="flex flex-col space-y-1">
-        <label className="text-sm font-medium">Category</label>
-        <input
-          {...register("category")}
-          className="p-2 rounded bg-base-100 border border-bg-gray-200"
-        />
-      </div>
+          <div className="space-y-3">
+            <label className="text-xs font-bold uppercase tracking-[0.2em] opacity-40 ml-1">
+              Classification
+            </label>
+            <Input
+              {...register("category", { required: true })}
+              placeholder="Sector"
+              leftIcon={<Tag className="w-4 h-4" />}
+            />
+          </div>
 
-      <div className="flex flex-col space-y-1">
-        <label className="text-sm font-medium">Price</label>
-        <input
-          type="number"
-          step="0.01"
-          {...register("price", { valueAsNumber: true })}
-          className="p-2 rounded bg-base-100 border"
-        />
-      </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-3">
+              <label className="text-xs font-bold uppercase tracking-[0.2em] opacity-40 ml-1">
+                Valuation
+              </label>
+              <Input
+                type="number"
+                step="0.01"
+                {...register("price", { valueAsNumber: true, required: true })}
+                placeholder="Price"
+                leftIcon={<DollarSign className="w-4 h-4" />}
+              />
+            </div>
 
-      <div className="flex flex-col space-y-1">
-        <label className="text-sm font-medium">Quantity</label>
-        <input
-          type="number"
-          {...register("stock", { valueAsNumber: true })}
-          className="p-2 rounded bg-base-100 border"
-        />
-      </div>
+            <div className="space-y-3">
+              <label className="text-xs font-bold uppercase tracking-[0.2em] opacity-40 ml-1">
+                Volume
+              </label>
+              <Input
+                type="number"
+                {...register("stock", { valueAsNumber: true, required: true })}
+                placeholder="Quantity"
+                leftIcon={<Layers className="w-4 h-4" />}
+              />
+            </div>
+          </div>
+        </div>
 
-      <div className="flex h-auto justify-center space-x-4 pt-2 ">
-        <Button>Save</Button>
-        <Button size="sm" variant="danger" type="button" onClick={onCancel}>
-          Cancel
-        </Button>
-      </div>
-    </form>
+        <div className="flex gap-4 mt-4">
+          <Button
+            variant="glow"
+            type="submit"
+            className="flex-1 h-14 rounded-2xl font-black"
+            rightIcon={<Save className="w-4 h-4 ml-1" />}
+          >
+            Update Ledger
+          </Button>
+          <Button
+            variant="outline"
+            type="button"
+            onClick={onCancel}
+            className="h-14 rounded-2xl px-6 border-white/10"
+          >
+            Abort
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 }

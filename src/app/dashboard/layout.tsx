@@ -2,7 +2,6 @@ import AnimatedPage from "@/components/AnimatedPage";
 import Footer from "@/components/ui/Footer";
 import Navbar from "@/components/ui/Navbar";
 import Sidebar from "@/components/ui/Sidebar";
-import Providers from "../providers";
 
 export default function RootLayout({
   children,
@@ -10,8 +9,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-     <Providers>
-
     <div className="flex min-h-screen w-full text-base-content ">
       <aside className=" bg-base-200 fixed left-0 top-0 h-full w-64   shadow-lg">
         <Sidebar />
@@ -23,11 +20,10 @@ export default function RootLayout({
         </header>
 
         <main className="mt-16 p-6 overflow-y-auto min-h-screen">
-          {children}
+          <AnimatedPage>{children}</AnimatedPage>
         </main>
         <Footer />
       </div>
     </div>
-     </Providers>
   );
 }

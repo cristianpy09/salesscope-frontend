@@ -6,18 +6,16 @@ import ListSales from "@/components/ui/salesUI/ListSales";
 import { getLastSales } from "@/services/orders.services";
 import { Order } from "@/types/OrdersType";
 import { Product } from "@/types/ProductType";
-import { getProductsMap } from "@/services/products.services";
+import { motion } from "framer-motion";
 
 type Props = {
   initialProducts: Product[];
   initialSales: Order[];
- 
 };
 
 export default function SalesPageClient({
   initialProducts,
   initialSales,
- 
 }: Props) {
   const [sales, setSales] = useState<Order[]>(initialSales);
 
@@ -27,12 +25,20 @@ export default function SalesPageClient({
   };
 
   return (
-    <div className="grid grid-cols-2 p-2 mt-5 mx-15 space-x-15 rounded-2xl">
-      <RegisterSaleForm
-        initialProducts={initialProducts}
-        onSaleCreated={refreshSales}
-      />
-      <ListSales  sales={sales} />
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="grid grid-cols-1 xl:grid-cols-12 gap-8"
+    >
+      <div className="xl:col-span-4">
+        <RegisterSaleForm
+          initialProducts={initialProducts}
+          onSaleCreated={refreshSales}
+        />
+      </div>
+      <div className="xl:col-span-8">
+        <ListSales sales={sales} />
+      </div>
+    </motion.div>
   );
 }

@@ -1,14 +1,24 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import clsx from "clsx";
 
-type ButtonVariant = "primary" | "secondary" | "danger" | "ghost";
-type ButtonSize = "sm" | "md" | "lg";
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "ghost"
+  | "error"
+  | "outline"
+  | "glow";
+type ButtonSize = "xs" | "sm" | "md" | "lg";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: ButtonVariant;
   size?: ButtonSize;
   isLoading?: boolean;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+  className?: string;
 }
 
 export default function Button({
@@ -18,54 +28,59 @@ export default function Button({
   isLoading = false,
   disabled,
   className,
+  leftIcon,
+  rightIcon,
   ...props
 }: ButtonProps) {
   const isDisabled = disabled || isLoading;
+
+  const variantMap: Record<ButtonVariant, string> = {
+    primary: "btn-primary shadow-lg shadow-primary/20",
+    secondary: "btn-secondary shadow-lg shadow-secondary/20",
+    accent: "btn-accent shadow-lg shadow-accent/20",
+    ghost: "btn-ghost hover:bg-white/5",
+    error: "btn-error shadow-lg shadow-error/20",
+    outline: "btn-outline border-white/20 hover:bg-white/5",
+    glow: "bg-primary text-primary-content hover:scale-105 glow-primary border-none",
+  };
+
+  const sizeMap: Record<ButtonSize, string> = {
+    xs: "btn-xs",
+    sm: "btn-sm",
+    md: "btn-md",
+    lg: "btn-lg",
+  };
 
   return (
     <button
       disabled={isDisabled}
       className={clsx(
-        "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer",
-        baseStyles,
-        variantStyles[variant],
-        sizeStyles[size],
-        isDisabled && "cursor-not-allowed opacity-70",
-        className
+        "btn normal-case font-bold transition-all duration-300 active:scale-95",
+        variantMap[variant],
+        sizeMap[size],
+        isLoading && "btn-disabled opacity-50",
+        className,
       )}
+      aria-busy={isLoading}
       {...props}
     >
-      {isLoading && <Spinner />}
-      {children}
+      {isLoading ? (
+        <span className="loading loading-spinner loading-sm" />
+      ) : (
+        <>
+          {leftIcon && (
+            <span className="inline-flex transition-transform group-hover:-translate-x-1">
+              {leftIcon}
+            </span>
+          )}
+          {children}
+          {rightIcon && (
+            <span className="inline-flex transition-transform group-hover:translate-x-1">
+              {rightIcon}
+            </span>
+          )}
+        </>
+      )}
     </button>
-  );
-}
-
-
-const baseStyles =
-  "select-none focus:ring-blue-400";
-
-const variantStyles: Record<ButtonVariant, string> = {
-  primary:
-    "bg-[#5bb017] hover:bg-[#64c219]",
-  secondary:
-    "bg-gray-200 text-gray-800 hover:bg-gray-300",
-  danger:
-    "bg-red-500 text-white hover:bg-red-600",
-  ghost:
-    "bg-transparent text-blue-600 hover:bg-blue-50",
-};
-
-const sizeStyles: Record<ButtonSize, string> = {
-  sm: "px-3 py-1.5 text-sm",
-  md: "px-4 py-2.5 text-base",
-  lg: "px-6 py-3 text-lg",
-};
-
-/* ───────────────── Spinner ───────────────── */
-
-function Spinner() {
-  return (
-    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
   );
 }

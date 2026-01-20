@@ -1,4 +1,63 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: all;
+  themes: dark;
+}
+
+@theme {
+  --color-primary: #d4ff00;
+  --color-primary-content: #000000;
+  --color-secondary: #7000ff;
+  --color-secondary-content: #ffffff;
+  --color-accent: #00d1ff;
+  --color-accent-content: #000000;
+  --color-base-100: #050505;
+  --color-base-200: #0f0f0f;
+  --color-base-300: #1a1a1a;
+  --color-base-content: #f0f0f0;
+}
+
+:root {
+  --border-radius-custom: 1rem;
+}
+
+body {
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background-color: var(--color-base-100);
+  color: var(--color-base-content);
+  -webkit-font-smoothing: antialiased;
+}
+
+.glass-panel {
+  background: rgba(15, 15, 15, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.premium-shadow {
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+.glow-primary {
+  box-shadow: 0 0 20px -5px rgba(212, 255, 0, 0.2);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }

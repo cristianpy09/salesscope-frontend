@@ -1,48 +1,82 @@
-import React from "react";
+import React, { ReactNode } from "react";
+import clsx from "clsx";
 
-type CardProps = {
-
-  w?: string;
-  h?: string;
-  worth?: number | string;
+interface CardProps {
+  title?: string;
+  value?: number | string;
+  subtitle?: string;
   percentage?: string;
-  mainText?: string;
-  endText?: string;
-  iconRoute?: string;
-  simbol?: boolean;
-};
+  icon?: ReactNode;
+  className?: string;
+  children?: ReactNode;
+  variant?: "glass" | "solid" | "simple";
+}
 
 export default function Card({
-
-  w,
-  h,
-  worth,
+  title,
+  value,
+  subtitle,
   percentage,
-  mainText,
-  endText,
-  iconRoute,
-  simbol,
+  icon,
+  className,
+  children,
+  variant = "glass",
 }: CardProps) {
   return (
     <div
-      className={`relative bg-base-200  ${w} ${h} rounded-2xl shadow-[0_4px_6px_-1px_rgba(0,0,0,0.2)] hover:scale-101  `}
+      className={clsx(
+        "card transition-all duration-500 premium-shadow group",
+        variant === "glass" && "glass-panel hover:bg-white/8",
+        variant === "solid" && "bg-base-200 border border-white/5",
+        variant === "simple" && "bg-transparent border border-white/10",
+        className,
+      )}
     >
-      <h1 className=" p-4 ">{mainText}</h1>
-      <div className="flex justify-center  ">
-        <h1 className="font-bold  text-4xl  text-center mt-5 ">
-         
-          {worth}
-        </h1>
-        <img
-          src={`${iconRoute}`}
-          alt="icon"
-          className="w-10 h-10 absolute top-4 right-4 mr- mt-"
-        />
+      <div className="card-body p-6">
+        <div className="flex justify-between items-start">
+          <div className="space-y-1">
+            {title && (
+              <h3 className="card-title text-sm font-bold uppercase tracking-widest opacity-50 group-hover:opacity-100 transition-opacity">
+                {title}
+              </h3>
+            )}
+            {value !== undefined && (
+              <div className="text-4xl font-extrabold tracking-tight bg-linear-to-br from-white to-white/60 bg-clip-text text-transparent">
+                {value}
+              </div>
+            )}
+          </div>
+          {icon && (
+            <div className="p-3 bg-white/5 rounded-2xl border border-white/10 group-hover:scale-110 group-hover:bg-primary/10 transition-all duration-500">
+              {icon}
+            </div>
+          )}
+        </div>
+
+        {(percentage || subtitle) && (
+          <div className="mt-6 flex items-center gap-2 text-sm">
+            {percentage && (
+              <span
+                className={clsx(
+                  "font-bold px-2 py-0.5 rounded-lg border",
+                  percentage.startsWith("-")
+                    ? "bg-error/10 text-error border-error/20"
+                    : "bg-primary/10 text-primary border-primary/20",
+                )}
+              >
+                {percentage}
+              </span>
+            )}
+            {subtitle && (
+              <span className="opacity-40 group-hover:opacity-60 transition-opacity">
+                {subtitle}
+              </span>
+            )}
+          </div>
+        )}
+
+        {children && <div className="mt-4">{children}</div>}
       </div>
-      <h3 className="  p-4 mt-8 ml-8">
-        {percentage}
-        {endText}
-      </h3>
     </div>
   );
 }

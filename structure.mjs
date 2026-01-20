@@ -1,6 +1,4 @@
-// generate-structure.mjs
 import fs from "fs";
-import path from "path";
 
 const folders = [
   "src/components",
